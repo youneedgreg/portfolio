@@ -76,7 +76,8 @@ export function CVTemplate() {
             <a href="mailto:gregorytemwa1212@gmail.com">gregorytemwa1212@gmail.com</a> ·{" "}
             <a href="https://temwa.dev">temwa.dev</a> · <a href="https://github.com/youneedgreg">github.com/youneedgreg</a> ·{" "}
             <a href="https://www.linkedin.com/in/youneedgreg/">linkedin.com/in/youneedgreg</a> ·{" "}
-            <a href="https://x.com/youneedgreg">x.com/youneedgreg</a>
+            <a href="https://x.com/youneedgreg">x.com/youneedgreg</a> ·{" "}
+            <a href="https://devpost.com/youneedgreg">devpost.com/youneedgreg</a>
           </p>
         </header>
 
