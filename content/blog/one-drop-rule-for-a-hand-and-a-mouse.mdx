@@ -1,0 +1,31 @@
+In Jumpwise, you jump-start a virtual car by carrying clamps from a rack to the battery terminals. The whole guide hangs on one question asked every time you let go: did that clamp land on a terminal, and which one? Get it wrong one way and a correct clamp bounces back to the rack. Get it wrong the other way and the wrong-clamp warning fires at someone who did it right.
+
+The Lens is built for Snap Spectacles, where your hand puts the clamp's tip on the terminal. I had no glasses, so everything ran in the Lens Studio preview, where a mouse is the hand. Those two inputs don't move a clamp the same way.
+
+## Why the obvious rule failed
+
+The obvious rule is distance: the clamp lands on a terminal if its tip is within a few centimetres of it in 3D. The terminal rings are 6 cm across, and the design brief made every drop zone twice its visible size, so a tip within 6 cm of the terminal's centre counts.
+
+That works for a hand. It doesn't work for a mouse. When you drag in the preview, the clamp stays at a fixed distance along the line from your eye through the pointer. You can put it exactly on top of a terminal on screen while it floats several centimetres in front of it or behind it. From where you're looking it's on the terminal, and in 3D it's in the air.
+
+## Two tests, either one counts
+
+So a clamp counts as on a zone when either of two things is true: its tip is within the radius of the zone in 3D, or the line from your eye through the tip passes within the radius of it. The code takes the smaller of the two distances for each zone, and the closest zone under the radius wins.
+
+The second test is what makes the mouse work. On screen, "on top of the terminal" means the sightline through the tip passes through the terminal, and that's what it checks. On glasses, your hand puts the tip on the terminal and the first test does the work. The step logic never knows which test fired. It only gets a zone, or nothing.
+
+I like the rule because it's small, it's pure maths with no scene access, and it describes what both users mean by "here". It also hides something.
+
+## What it hides
+
+The sightline test has no distance limit. On glasses, if you held a clamp up near your face so it lined up with the dead battery's + terminal 60 cm away and let go, the rule would say it landed. For the preview that's the point. For a real hand it's too generous, and the generosity is pointed at the guide's most important check: the last black clamp has to go on bare metal, not on the dead battery's minus terminal.
+
+The tests don't settle it either. The LEAF test interactor carries each clamp by steering it until the tip lines up with the goal as seen from the eye, the same way the mouse does. Every scripted drop lines up on the sightline, so every passing drop could have passed on that test alone. Nothing in the six scenarios isolates the 3D test, which is the one that would decide drops on glasses.
+
+None of this is a bug in the preview, where the guide behaves exactly as designed. It's a decision that was right for the only input I had, and it should change when the input does. On real glasses I'd turn the sightline test off, or keep it but only near the hand, and add a scenario that drops a clamp lined up with a terminal from a distance and expects it to come back to the rack.
+
+## Writing it where it can't be missed
+
+The reason I can say all this is that it's written next to the code. The comment on the drop-zone module says which test is for which input, and why the second one exists. The README repeats it in one paragraph under the architecture diagram. When the preview needs a rule the real device shouldn't have, the least you can do is say which part is the stand-in, so whoever builds the glasses version doesn't inherit it as if it were the design.
+
+> A rule that works for both inputs is two rules. Say which one is the real one.

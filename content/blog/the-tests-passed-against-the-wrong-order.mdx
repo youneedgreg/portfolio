@@ -1,0 +1,31 @@
+Jumpwise walks you through jump-starting a car on Snap Spectacles, one glowing step at a time. The whole point of it is the order. Red clamp on the dead battery's +, red on the donor's +, black on the donor's minus, and the last black clamp on bare metal away from the dead battery, because an engine bay may hold flammable gases and a spark there could start a fire. Then start the donor car. Then take the clamps off in reverse.
+
+That's the order I wrote into the design brief. It was missing a step, and every test passed anyway.
+
+## Where the order came from
+
+The brief came out of an interview: the Devpost skill pack asks questions and I answered them in my own words. The connect order and the removal order came from what I knew about jump-starting a car. I knew enough to put one item under risks and open questions:
+
+> The jump-start order and removal order have not yet been checked against a source; check before recording.
+
+Then the build happened. My coding agent built the connect flow from the brief, then removal on the same step logic, and wrote a LEAF scenario for each done criterion. The removal scenario checked that after "Start donor car", the guide offered "Remove clamps" and lit the clamps black first, in reverse, each one going back to the rack, then "Done". All six scenarios passed in the preview.
+
+## What the source said
+
+Before recording the demo, I checked the order against Edmunds' jump-start guide. The connect order held. The removal had a gap: after the donor car has run for a few minutes, you start the dead car, and only then does any cable come off. My brief went straight from "Start donor car" to "Remove clamps". Followed literally, Jumpwise would have had a driver take the cables off a car that hadn't been started yet.
+
+The fix was small. The brief got a new line, with a note saying where it came from. The guide got a card after "Start donor car" that says "Let the donor car run a few minutes, then start the dead car", with a "Dead car started" button. "Remove clamps" only appears after that. The full-connect and removal scenarios now walk through the new step, and all six pass again.
+
+## Why the tests couldn't catch it
+
+The tests weren't wrong. They checked exactly what the done criteria said, and the done criteria came from the brief. When the brief is the source of truth for the code and the source of truth for the tests, a mistake in the brief passes both. The agent built what I asked for, faithfully, and the tests confirmed it was built faithfully. Neither one could tell me what I asked for was incomplete.
+
+This is the same lesson I wrote about with [Jirani's webhooks](/blog/a-test-that-shares-your-assumption-cannot-catch-it), where my parser and my simulator shared one wrong reading of a payload. Two things that agree because they came from the same place aren't two checks. The only fix is a source neither of them wrote: there, Ring's documented examples; here, a jump-start guide written by people who do this for a living.
+
+It matters more when an agent writes the code. A human developer building a jump-start guide might have stopped and said "don't you start the dead car first?" An agent working from an approved brief builds the brief. That's what you want from it most of the time, and it moves the checking to the brief. If a step is about safety, it gets checked against a source before it's written down as a requirement, not after six green tests make it feel settled.
+
+## The note I kept
+
+Jumpwise still says, on the card beside "Found battery", that some cars have remote jump points and you should check your owner's manual. The README says it too, and adds that Jumpwise is a guide, not a safety device. Checking one source fixed one missing step. It didn't make the guide authoritative, and the app shouldn't pretend otherwise.
+
+> Tests check the code against the spec. Something else has to check the spec.

@@ -1,0 +1,31 @@
+Jumpwise, my AR guide for jump-starting a car, was made for glasses I didn't have. No Spectacles were available, so it was built, tested and demonstrated entirely in the Lens Studio preview, on a laptop, with a mouse for a hand. All six of its LEAF test scenarios pass. I'm confident it works, and I don't know if it's any good.
+
+Those two sentences aren't in tension. They're about different things, and the design brief made me keep them apart from the start.
+
+## Two labels
+
+The brief's "judge it" checklist has an instruction I'd now use on any project: write "logic proven" next to anything the tests and preview show working, and "feel unproven" next to anything only real glasses could tell you. Then put both in the README.
+
+Logic is what the guide decides. Only the next target glows. A clamp on a wrong terminal gets the warning and goes back to the rack. The last black clamp only takes the bare-metal ground point. "Start donor car" appears only after four correct clamps, and removal goes black first, in reverse. A chime and an arrow point to the car behind you, and only when the next step is on it. The preview can show all of that, and the tests check it every run.
+
+Feel is what it's like to stand there. Whether a 6 cm ring reads at arm's length in daylight. Whether the step card sits where your eyes already are. Whether grabbing a real clamp with hand tracking is reliable when the clamp is heavy. The preview can't answer any of it, and I didn't want a passing test to sound like it did.
+
+## Turning a feel question into a logic one, partly
+
+Some questions sit on the line. The brief flagged a risk: steps 2 and 3 are on the donor car, about 1.5 m behind you, so you carry a clamp while turning round. If the grab dropped mid-turn, the guide wouldn't work at all, and that's something the preview can test.
+
+So one scenario does exactly that. It takes the second red clamp, turns the head and hand ray through more than 160 degrees while holding it, and checks the grab was never lost on a single frame, never released, and that the drop on the donor's + counts. It passes, and the README lists it as the 170 degree turn check. The scenario's own header says what it doesn't prove: how a real hand or a preview mouse feels doing it. It turned "will this break?" into a logic question and left "is this comfortable?" where it was.
+
+## What stayed unproven
+
+Some things I couldn't even stage. The brief's opening image has a clamp in each hand, and the preview's mouse is one hand. The clamp rack sits at waist height between the cars, and the brief kept it there despite a concern that it'll be out of view while you look at a terminal. I still don't know if that's right. And there's no battery detection at all: a big "Found battery" button stands in for it, kept obvious in the scene so nobody mistakes it for the real thing.
+
+The demo video falls on the same side of the line. It was recorded by a test scenario that drives the whole flow at viewing speed, and the README says so. That's why it's smooth, and it's also why it isn't evidence of how a person does it.
+
+## Why I write it down
+
+It would be easy to leave the second label out. Six green ticks look like a finished product, and a hackathon rewards finished-looking things. But the gap between "the logic works in the preview" and "this helps someone in a car park" is the whole question for an AR guide, and pretending it's closed would make the first claim less believable, not more.
+
+The README's last section before setup is called "What's proven, what isn't". It has two bullets. I think that section is the most useful one in the project for whoever picks it up next, including me with a pair of glasses.
+
+> Passing tests tell you the logic is right. Only the device can tell you if the idea is.
