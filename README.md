@@ -69,4 +69,4 @@ Security: a strict Content Security Policy and security headers (`next.config.ts
 
 ## Contact
 
-[temwa.dev](https://temwa.dev) · gregorytemwa1212@gmail.com · [GitHub](https://github.com/youneedgreg) · [LinkedIn](https://www.linkedin.com/in/youneedgreg/) · [X](https://x.com/youneedgreg)
+[temwa.dev](https://temwa.dev) · gregorytemwa1212@gmail.com · [GitHub](https://github.com/youneedgreg) · [LinkedIn](https://www.linkedin.com/in/youneedgreg/) · [X](https://x.com/youneedgreg) · [Devpost](https://devpost.com/youneedgreg) · [YouTube](https://www.youtube.com/@gregorytemwa)

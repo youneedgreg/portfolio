@@ -66,7 +66,7 @@ export default function MobileMenu({
               ))}
             </ul>
           </div>
-          <div className="flex items-center gap-4 border-t border-border pt-5 font-mono text-sm">
+          <div className="flex flex-wrap items-center gap-x-4 border-t border-border pt-5 font-mono text-sm">
             <a href={SOCIAL.github} target="_blank" rel="noreferrer" className="min-h-11 content-center hover:text-primary">
               GitHub
             </a>
@@ -75,6 +75,12 @@ export default function MobileMenu({
             </a>
             <a href={SOCIAL.x} target="_blank" rel="noreferrer" className="min-h-11 content-center hover:text-primary">
               X
+            </a>
+            <a href={SOCIAL.devpost} target="_blank" rel="noreferrer" className="min-h-11 content-center hover:text-primary">
+              Devpost
+            </a>
+            <a href={SOCIAL.youtube} target="_blank" rel="noreferrer" className="min-h-11 content-center hover:text-primary">
+              YouTube
             </a>
             <a href={`mailto:${SOCIAL.email}`} className="min-h-11 content-center hover:text-primary">
               Email

@@ -117,6 +117,8 @@ const personJsonLd = {
         "https://github.com/youneedgreg",
         "https://www.linkedin.com/in/youneedgreg/",
         "https://x.com/youneedgreg",
+        "https://devpost.com/youneedgreg",
+        "https://www.youtube.com/@gregorytemwa",
       ],
     },
     {

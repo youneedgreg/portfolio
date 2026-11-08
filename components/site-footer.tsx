@@ -64,6 +64,16 @@ export default function SiteFooter() {
                 </a>
               </li>
               <li>
+                <a href={SOCIAL.devpost} target="_blank" rel="noreferrer" className={linkClass}>
+                  Devpost
+                </a>
+              </li>
+              <li>
+                <a href={SOCIAL.youtube} target="_blank" rel="noreferrer" className={linkClass}>
+                  YouTube
+                </a>
+              </li>
+              <li>
                 <a href={SOCIAL.whatsapp} target="_blank" rel="noreferrer" className={linkClass}>
                   WhatsApp
                 </a>

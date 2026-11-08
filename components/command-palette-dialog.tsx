@@ -20,7 +20,9 @@ import {
   FlaskConical,
   Compass,
   Sun,
+  Trophy,
   User,
+  Youtube,
 } from "lucide-react"
 import {
   CommandDialog,
@@ -188,6 +190,14 @@ export default function CommandPaletteDialog({
           >
             <XLogo />
             Open X (Twitter) profile
+          </CommandItem>
+          <CommandItem onSelect={() => runCommand(() => window.open(SOCIAL.devpost, "_blank", "noopener,noreferrer"))}>
+            <Trophy />
+            Open Devpost profile
+          </CommandItem>
+          <CommandItem onSelect={() => runCommand(() => window.open(SOCIAL.youtube, "_blank", "noopener,noreferrer"))}>
+            <Youtube />
+            Open YouTube channel
           </CommandItem>
           <CommandItem onSelect={() => runCommand(() => window.open(SOCIAL.whatsapp, "_blank", "noopener,noreferrer"))}>
             <MessageCircle />
