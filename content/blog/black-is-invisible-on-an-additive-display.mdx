@@ -1,0 +1,31 @@
+Jumpwise is an AR guide for Snap Spectacles that walks you through jump-starting a car. It puts a glowing number on each battery terminal and a short card beside it: "Red clamp to + on the dead battery". The card is the only text you read with a heavy clamp in your hand, so it has to be readable at arm's length, in daylight, over an engine bay.
+
+For most of the build, the cards were dark grey boxes. They looked fine.
+
+## A rule I had already written down
+
+Spectacles has an additive display. It can only add light to what you see, never take it away, so black isn't drawn at all: it's see-through. Dark grey is nearly see-through. I knew this before the build started. The design brief I gave my coding agent says it in so many words:
+
+> The display is additive: black renders as transparent. Don't rely on black or very dark content to be seen; keep text light and readable from where the user stands.
+
+The agent built the cards and buttons with Spectacles UI Kit, which is the right thing to do, because the kit's buttons work with a hand on glasses, with the mouse in the preview, and with the test runner. But the kit's default backplate and button styles are dark grey gradients. On glasses they read as no plate at all. In the Lens Studio preview, which runs on an ordinary screen, they're dark boxes behind white text, and that's a perfectly good-looking card.
+
+So the rule was in the brief, the defaults broke it, and the only place I could look at the result showed me the version that works.
+
+## What I saw, and what I changed
+
+I caught it walking the scene in Interactive Preview, the way the brief's own checklist asks: stand where a driver would stand and look at the task. The comfort check has a line for it, "No dark UI disappearing", and every card in front of me was a dark box. It looked right. The rule said it would be gone.
+
+I gave the fix as a design note, not code: light outline plates instead of the kit's dark grey, and bigger text. The agent wrote a small helper that draws a rounded outline in a pale blue-white, with a fill that's almost clear: 6% white behind the cards, 10% behind the buttons. The buttons switched to the kit's Ghost style, a clear face that only lights its edge when you aim at it, with the outline as their resting look.
+
+Text went up too. The step card moved from the Body text style to HeadlineXL, the owner's manual card beside "Found battery" to Headline1, and the Next button grew from 12 × 6 cm to 16 × 7 cm. Long labels like "Dead car started" now shrink to fit instead of running off the edge. Then every test ran again.
+
+## Why it nearly shipped
+
+Nothing was wrong in a way a test would notice. The cards existed, held the right words, appeared at the right step and sat where the brief said. Every LEAF scenario passed before the change and after it. The failure only existed on the display, and I didn't have one. No Spectacles were available for this project, so the preview was the only screen.
+
+That's the part I'd take to any project with a second rendering target, like print styles, a dark theme or a small screen. If the place you check renders differently from the place it ships, a design rule has to be checked by reading the code against the rule, because looking will tell you the wrong answer. Here the giveaway was a default. Kits pick defaults for the common display, and this wasn't the common display.
+
+The plates now look the same in the preview as they should on glasses: a light frame around light text, with the world showing through. Whether that reads well in direct sunlight is still unproven, because only real glasses can tell me that.
+
+> On glasses, black isn't a colour. It's a hole.

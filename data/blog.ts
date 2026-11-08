@@ -14,6 +14,46 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "logic-proven-feel-unproven",
+    title: "Logic proven, feel unproven",
+    summary:
+      "Jumpwise was built, tested and demonstrated in a preview, with a mouse for a hand and no glasses. All six tests pass, and I still don't know if it's any good. Why the README keeps those two claims apart, and how one test turned part of a feel question into a logic one.",
+    date: "2026-11-08",
+    readingTime: "4 min read",
+    tags: ["AR", "Testing", "Spectacles", "Lens Studio"],
+    project: { title: "Jumpwise", slug: "jumpwise" },
+  },
+  {
+    slug: "the-tests-passed-against-the-wrong-order",
+    title: "The tests passed against the wrong order",
+    summary:
+      "My jump-start guide's brief was missing a step: start the dead car before any clamp comes off. The coding agent built the brief faithfully and six tests confirmed it, because the tests came from the brief too. Checking one outside source caught it.",
+    date: "2026-11-08",
+    readingTime: "4 min read",
+    tags: ["Testing", "Specifications", "AI Agents", "Safety"],
+    project: { title: "Jumpwise", slug: "jumpwise" },
+  },
+  {
+    slug: "one-drop-rule-for-a-hand-and-a-mouse",
+    title: "One drop rule for a hand and a mouse",
+    summary:
+      "A clamp lands on a terminal if its tip is close in 3D, or if the line from your eye through it passes close. The second test makes mouse dragging work in the preview. It has no distance limit, and the tests line up on it the same way the mouse does, so it's the part to change for real glasses.",
+    date: "2026-11-08",
+    readingTime: "4 min read",
+    tags: ["AR", "Interaction Design", "TypeScript", "Lens Studio"],
+    project: { title: "Jumpwise", slug: "jumpwise" },
+  },
+  {
+    slug: "black-is-invisible-on-an-additive-display",
+    title: "Black is invisible on an additive display",
+    summary:
+      "Spectacles can only add light, so black is see-through. The rule was in my design brief, the UI kit's dark grey defaults broke it, and the preview showed me the version that works. What I changed, and why no test could have caught it.",
+    date: "2026-11-08",
+    readingTime: "4 min read",
+    tags: ["AR", "UI Design", "Spectacles", "Accessibility"],
+    project: { title: "Jumpwise", slug: "jumpwise" },
+  },
+  {
     slug: "all-22-ran-and-that-proves-less-than-it-sounds",
     title: "All 22 ran, and that proves less than it sounds",
     summary:
