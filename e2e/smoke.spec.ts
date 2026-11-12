@@ -46,8 +46,9 @@ for (const path of PAGES) {
     expect(overflow, "no horizontal scrolling").toBeLessThanOrEqual(1)
     expect(errors).toEqual([])
     // Full-page shots of very long pages exceed WebKit's 32,767px limit; fall back to the viewport.
-    const height = await page.evaluate(() => document.documentElement.scrollHeight)
-    await info.attach("page", { body: await page.screenshot({ fullPage: height < 16_000 }), contentType: "image/png" })
+    // The limit is in device pixels, so a 3x phone hits it at about 10,900 CSS pixels.
+    const height = await page.evaluate(() => document.documentElement.scrollHeight * window.devicePixelRatio)
+    await info.attach("page", { body: await page.screenshot({ fullPage: height < 32_000 }), contentType: "image/png" })
   })
 }
 
