@@ -24,6 +24,16 @@ export const posts: Post[] = [
     project: { title: "Hakika", slug: "hakika" },
   },
   {
+    slug: "the-guard-passed-a-number-the-photo-planted",
+    title: "The guard passed a number the photo planted",
+    summary:
+      "Every number in Hakika's owner summary has to appear in the facts the model was given. A planted quote still got \"KES 1,000\" through, because those facts quoted words from the photo. The fix was to give the model less, and a number guard still can't check meaning.",
+    date: "2026-11-12",
+    readingTime: "4 min read",
+    tags: ["AI Safety", "Guardrails", "LLMs", "Testing"],
+    project: { title: "Hakika", slug: "hakika" },
+  },
+  {
     slug: "logic-proven-feel-unproven",
     title: "Logic proven, feel unproven",
     summary:
