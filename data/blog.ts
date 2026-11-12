@@ -34,6 +34,16 @@ export const posts: Post[] = [
     project: { title: "Hakika", slug: "hakika" },
   },
   {
+    slug: "paypal-pays-the-supplier-not-us",
+    title: "PayPal pays the supplier, not us",
+    summary:
+      "Hakika never holds anyone's money: each PayPal order names the verified supplier as the payee. That was the first thing tested, with a $1 sandbox order, and it shaped everything after it: server-side amounts, verified payees, shillings in and dollars out, and no model on the money path.",
+    date: "2026-11-12",
+    readingTime: "4 min read",
+    tags: ["Payments", "PayPal", "System Design", "Fintech"],
+    project: { title: "Hakika", slug: "hakika" },
+  },
+  {
     slug: "logic-proven-feel-unproven",
     title: "Logic proven, feel unproven",
     summary:

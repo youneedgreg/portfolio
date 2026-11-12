@@ -1,0 +1,38 @@
+Hakika lets someone abroad pay for building work at home only when the work is real. Before any of the AI, there was a plainer question that decided whether the project could exist: whose account does the money pass through?
+
+If it passes through ours, Hakika is holding other people's money. That means escrow, licences and a lot of trust a two-person hackathon team can't earn. So the rule from day one was that Hakika never holds funds. The owner pays the supplier, and Hakika only decides whether the button is allowed to appear.
+
+## The first test
+
+PayPal's Orders v2 API lets an order name a payee other than the app that creates it. On 27 October, before anything else was built, I ran that in the sandbox with a script: a $1.00 order from Hakika's sandbox app with a fictional supplier's sandbox account as the payee.
+
+What I wrote down from that run:
+
+- The order came back `PAYER_ACTION_REQUIRED`, and the link to send the buyer to was `payer-action`, not `approve` as I'd expected.
+- A sandbox buyer approved on PayPal's checkout page, and the capture completed. Reading the order back showed the supplier as the payee.
+- PayPal took its fee from the payee's side: $1.00 gross, $0.34 fee, $0.66 net to the supplier. So a supplier receives the price minus PayPal's fee, which the product has to be honest about.
+- Retrying the capture with the same `PayPal-Request-Id` returned the same capture, not a second charge.
+
+If any of that had failed, the design would have changed. It passed, so everything else was built on top of it.
+
+## What that one decision shaped
+
+**The server decides every amount.** When the owner presses the PayPal button, the browser sends which request or milestone is being paid and nothing else. The server works out the amount, the payee and the exchange rate from the database. A browser that sends a total is a browser that can be edited.
+
+**Only verified payees.** An order can only name a verified supplier, or for labour, the fundi on that milestone. A supplier written on a quote that Hakika doesn't know can't be paid. The owner is offered the cheapest verified alternative.
+
+**Shillings in, dollars out.** The Kenyan shilling isn't a normal PayPal presentment currency, so prices stay in KES everywhere a person reads them, and orders go out in USD at a daily rate saved with each payment. The money trail shows both, so an owner can see exactly how 55,000 shillings became $423.30.
+
+**Webhooks, not hope.** Signature-verified webhooks keep the money trail in sync with what PayPal actually did: completed, pending, declined, refunded and reversed captures, with duplicates ignored.
+
+**No model on the money path.** Amazon Nova reads quotes and photos, and Ask Hakika answers questions. Ask Hakika's only PayPal tool reads an order, and only one that belongs to the project. Nothing a model writes can create, approve or capture a payment.
+
+## On production
+
+On 11 November a sandbox approval on the live site paid a fictional verified supplier directly, and PayPal's signed webhook confirmed it in the money trail. That's the whole idea working end to end, in the sandbox, with fictional people. It isn't real money, and Hakika isn't a licensed payments business. It doesn't need to be, because it never touches the funds.
+
+## Why it was worth testing first
+
+The test was one script and a $1 sandbox order. Building the price checks, the proof checks and the agent first, then finding out PayPal wouldn't pay a third party, would have cost the project.
+
+> Test the assumption the whole design rests on before you build anything that depends on it.
