@@ -68,6 +68,46 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "hakika",
+    title: "Hakika",
+    description:
+      "An AI agent that lets Kenyans abroad pay for building work back home only when the work is real, built for the PayPal AI Hackathon. It reads quotes sent on WhatsApp, checks prices against verified suppliers, has PayPal pay the supplier directly once the owner approves, and holds the next payment until photo proof from the site passes code checks.",
+    image: "/assets/hakika-approval.jpg",
+    tags: ["TypeScript", "Next.js", "PayPal Orders v2", "PayPal Agent Toolkit", "Amazon Nova", "Amazon Bedrock", "Groq Whisper", "Twilio WhatsApp", "PostgreSQL", "Neon", "Drizzle", "Vercel Blob", "Bryntum Gantt", "Vitest"],
+    href: "https://tryhakika.vercel.app",
+    github: "https://github.com/youneedgreg/Hakika",
+    featured: true,
+    size: "large",
+    year: "2026",
+    lastActive: "2026-11-11",
+    role: "Backend, AI and payments (team of two, with Juliet Lauranne on design and front end)",
+    status: "live",
+    gallery: [
+      "/assets/hakika-approval.jpg",
+      "/assets/hakika-judge-mode.jpg",
+      "/assets/hakika-proof-verified.jpg",
+      "/assets/hakika-proof-suspicious.jpg",
+      "/assets/hakika-gantt-held.jpg",
+      "/assets/hakika-money-trail.jpg",
+      "/assets/hakika-architecture.jpg",
+    ],
+    openSource: true,
+    categories: ["full-stack", "backend", "ai-ml"],
+    hackathon: "PayPal AI Hackathon 2026",
+    caseStudy: {
+      problem:
+        "Many Kenyans abroad pay for a house being built back home through a relative or a foreman they can't watch. They send money for cement, the foreman sends a photo, and they hope the photo is real. Some aren't: the same \"foundation done\" photo gets sent twice, or it was taken at someone else's site.",
+      approach:
+        "Hakika (Swahili for certainty) sits between the site and the owner's money. The foreman sends a quote on WhatsApp as a photo, a Swahili or English voice note, or text. Hakika reads it, checks every line against reference prices and verified suppliers, and shows the owner an approval card with the problems found and a cheaper verified supplier. The owner approves in PayPal, and PayPal pays the supplier directly, so Hakika never holds money. Every delivery and milestone then needs proof: a one-time code photographed at the site within 30 minutes. If the proof fails, the next payment on that milestone is held and the owner sees why. A Judge Mode runs the whole story without a phone.",
+      techDetails:
+        "Next.js on Vercel with Drizzle, Neon Postgres and a private Vercel Blob store. Each payment is a PayPal Orders v2 order with the verified supplier or the fundi as the payee; the server works out every amount from the database and captures with an idempotency key, and signature-verified webhooks keep the money trail in sync. Amazon Nova 2 Lite on Bedrock reads quote photos and proof photos and runs Ask Hakika, a read-only agent whose only PayPal tool is the Agent Toolkit's get_order. Groq Whisper translates voice notes. Proof checks are plain code: the code, the time, the location and a perceptual hash for reused photos, with Nova adding soft checks. Prices stay in Kenyan shillings and orders go out in USD at a daily rate saved with each payment. 519 automated tests run in CI.",
+      results:
+        "Submitted to the PayPal AI Hackathon with a 2:20 demo, on a live site judges can use without a phone. A sandbox approval on production paid a fictional verified supplier directly through PayPal, and the signed webhook confirmed it. In Judge Mode a recycled photo sent from 37 km away is marked Suspicious and holds the foundation's labour payment. Judge Mode replays AI outputs recorded once from Nova, labelled as recorded, while every check, hold and amount is worked out again by code. The full WhatsApp round trip on real phones was never run; the demo uses Twilio's sandbox.",
+      challenges:
+        "Models obey text in photos: a quote photo with \"ignore previous instructions\" written on it changed what Nova read, so a photo whose text reads like instructions is now flagged and nothing read from it is used. Models also round, add and invent numbers, so every amount the owner reads is checked against the database, and an answer with a number that isn't in the records is replaced with a fixed sentence. WhatsApp strips photo metadata, so location comes from the capture page or a shared pin. The whole idea depended on PayPal paying a third party directly, so that was the first thing tested in the sandbox.",
+    },
+  },
+  {
     slug: "jumpwise",
     title: "Jumpwise",
     description:
