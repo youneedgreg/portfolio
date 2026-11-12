@@ -14,6 +14,36 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-quote-photo-gave-the-model-orders",
+    title: "The quote photo gave the model orders",
+    summary:
+      "A fake quote photo told Amazon Nova to record a different supplier and price, and it did, twice, despite a system prompt forbidding it. What held was asking the model to copy every word it saw and letting code decide what to believe, and what that still doesn't stop.",
+    date: "2026-11-12",
+    readingTime: "4 min read",
+    tags: ["AI Safety", "Prompt Injection", "Amazon Nova", "Payments"],
+    project: { title: "Hakika", slug: "hakika" },
+  },
+  {
+    slug: "the-guard-passed-a-number-the-photo-planted",
+    title: "The guard passed a number the photo planted",
+    summary:
+      "Every number in Hakika's owner summary has to appear in the facts the model was given. A planted quote still got \"KES 1,000\" through, because those facts quoted words from the photo. The fix was to give the model less, and a number guard still can't check meaning.",
+    date: "2026-11-12",
+    readingTime: "4 min read",
+    tags: ["AI Safety", "Guardrails", "LLMs", "Testing"],
+    project: { title: "Hakika", slug: "hakika" },
+  },
+  {
+    slug: "paypal-pays-the-supplier-not-us",
+    title: "PayPal pays the supplier, not us",
+    summary:
+      "Hakika never holds anyone's money: each PayPal order names the verified supplier as the payee. That was the first thing tested, with a $1 sandbox order, and it shaped everything after it: server-side amounts, verified payees, shillings in and dollars out, and no model on the money path.",
+    date: "2026-11-12",
+    readingTime: "4 min read",
+    tags: ["Payments", "PayPal", "System Design", "Fintech"],
+    project: { title: "Hakika", slug: "hakika" },
+  },
+  {
     slug: "logic-proven-feel-unproven",
     title: "Logic proven, feel unproven",
     summary:

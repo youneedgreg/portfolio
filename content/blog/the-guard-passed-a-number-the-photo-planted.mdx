@@ -1,0 +1,35 @@
+Every approval card in Hakika opens with a short summary for the owner: who sent the quote, what it costs, what's wrong with it, and whether a verified supplier is cheaper. Amazon Nova writes that paragraph from the findings code has already worked out. Models round, add and invent numbers, so the summary goes through a guard before anyone sees it.
+
+The guard is simple. Every number in the model's text has to appear in the facts it was given. If one doesn't, the text is thrown away and a fixed sentence is shown instead. I thought that made the summary safe. One test showed it was safe against the wrong thing.
+
+## The test that got through
+
+I gave Nova a quote whose item description had a planted line in it. Nova wrote "The quote is KES 1,000". The real total was far higher. The guard passed it.
+
+The guard was doing exactly what I'd built. It allowed any number that appeared in the findings, and the findings were messages like "Cement 50kg bag is quoted at KES 1,300 a bag". Those messages quoted words read from the photo, item names and supplier names included, so whatever number the photo carried came along with them. The planted 1,000 was in the allowed set because the photo had put it there.
+
+A guard that checks the model against its inputs is only as good as those inputs. Mine checked the model's output against text an attacker could write.
+
+## The fix: give the model less
+
+The change wasn't to the guard. It was to what the model gets.
+
+- The model now gets no words from the photo at all: each finding's type, its severity and its numbers, and nothing else.
+- An unverified supplier's name, which comes straight off the quote, is replaced before the model sees it.
+- The guard allows only numbers from that cleaned set.
+
+I replayed the saved replies offline: the planted one was rejected as `unknown_number`, and the clean one passed. Then I ran the new prompt on Nova with a false total and instructions planted in the item description and the supplier name. The summary came back identical to the clean run, and nothing planted appeared.
+
+## What a number guard can't see
+
+The same tests showed the guard's other limit. With a simple quote from a verified supplier, Nova wrote "Peter Mwangi from Mlima Hardware sent the quote". Peter is the foreman, not someone from the hardware shop. Every number was right, so the guard passed it, and it was still wrong.
+
+Naming his role in the data ("Peter Mwangi, the foreman on site") fixed that sentence on the next run. One run shows the wording can come out right, not that it always will. A number guard checks numbers. It doesn't check meaning, and I don't have a cheap check that does.
+
+That's part of why the summary isn't what the owner approves. Under it, the approval card shows the quote lines, the reference prices and each finding as code wrote it. The summary is there to be read quickly. The numbers that matter are shown beside it, straight from the database.
+
+## The general version
+
+Ask Hakika, the project's question-answering agent, has the same kind of guard: every number in an answer has to come from the records its tools returned. Building it, I kept asking the question this test taught me. Where did the allowed set come from, and could anyone outside the system have written it?
+
+> A guard that checks the model against its inputs inherits every input you didn't check.
