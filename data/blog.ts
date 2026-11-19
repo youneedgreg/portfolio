@@ -14,6 +14,36 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "a-paid-invoice-doesnt-prove-who-you-paid",
+    title: "A paid invoice doesn't prove who you paid",
+    summary:
+      "A Lightning preimage proves an invoice was paid, not that it was the recipient's. Rota's receipts pass five checks on each member's phone, against the circle's own record, and the M-Pesa route people in Kenya actually use only allows the weaker address proof.",
+    date: "2026-11-19",
+    readingTime: "4 min read",
+    tags: ["Bitcoin", "Lightning", "Payments", "Security"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
+    slug: "who-joined-first-with-no-server",
+    title: "Who joined first, with no server",
+    summary:
+      "In a savings circle, seat order is money. With no database, a late joiner could backdate a Nostr event and take an earlier seat, and any member could copy another's receipt. A signed roster and a recipient-signed record fixed both, and one of them is still only someone's word.",
+    date: "2026-11-19",
+    readingTime: "4 min read",
+    tags: ["Nostr", "System Design", "Cryptography", "Security"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
+    slug: "where-my-pitch-stops-being-true",
+    title: "Where my pitch stops being true",
+    summary:
+      "\"Rota can pay one contribution a month on your behalf, and nothing else\" holds for a capped Nostr Wallet Connect wallet. The threat model showed it doesn't hold for the built-in wallet against a compromised web host, and why I said so instead of hiding it.",
+    date: "2026-11-19",
+    readingTime: "3 min read",
+    tags: ["Threat Modeling", "Security", "Bitcoin", "Wallets"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
     slug: "the-quote-photo-gave-the-model-orders",
     title: "The quote photo gave the model orders",
     summary:

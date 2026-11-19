@@ -68,6 +68,44 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "rota",
+    title: "Rota",
+    description:
+      "A savings circle (a tontine in Senegal, a chama in Kenya) with no treasurer, built for the Dakar Bitcoin Hack by Btrust. Each member's phone pays that round's recipient directly over Lightning, even to an M-Pesa number, and leaves a signed receipt any member can check on their own phone. There is no Rota server, so there is no pot to hold.",
+    image: "/assets/rota-overview.jpg",
+    tags: ["TypeScript", "Next.js", "Bitcoin", "Lightning", "Breez SDK", "Nostr Wallet Connect", "LNURL", "Nostr", "NIP-44", "nostr-tools", "strfry", "Tailwind CSS", "Vitest", "Docker Compose", "Vercel"],
+    href: "https://rota-gb7u.vercel.app",
+    github: "https://github.com/youneedgreg/Rota",
+    featured: true,
+    size: "large",
+    year: "2026",
+    lastActive: "2026-11-19",
+    role: "Solo: product, payments, cryptography and front end",
+    status: "live",
+    gallery: [
+      "/assets/rota-overview.jpg",
+      "/assets/rota-round-verify.jpg",
+      "/assets/rota-wallet-demo.jpg",
+      "/assets/rota-security.jpg",
+      "/assets/rota-architecture.jpg",
+    ],
+    openSource: true,
+    categories: ["full-stack", "frontend"],
+    hackathon: "Dakar Bitcoin Hack 2026",
+    caseStudy: {
+      problem:
+        "Tontines and chamas run on one person: the treasurer who collects everyone's money, keeps the notebook and hands over the pot. When that person is late, makes a mistake or disappears, the group has no record anyone trusts, and nobody can prove who paid.",
+      approach:
+        "Rota removes the job instead of digitising it. The organizer creates a circle and shares one invite link. Members join and give a payout address: any Lightning address, or an M-Pesa number, which becomes number@bitcoin.co.ke. Each round, a member taps Pay: their own phone fetches a fresh invoice from the recipient's address, checks it and pays it over Lightning. The phone then signs a receipt and publishes it, encrypted for the circle, to a Nostr relay. Any member can press Verify, and the checks run on their own phone against the circle's own record. Each member can also export a signed track record of the rounds they paid. English and French.",
+      techDetails:
+        "A Next.js 16 and TypeScript web app served as static files: no database, no accounts, no API routes. Wallets are either Breez SDK (Spark) running in the browser, with recovery words sealed by the member's PIN (PBKDF2, AES-GCM), or the member's own wallet over Nostr Wallet Connect, accepted only as a pay-only connection capped at about one contribution a month and expiring at the end of the cycle, so the wallet enforces the cap. A receipt passes five checks: the preimage hashes to the invoice, the invoice commits to the recipient's address, it was signed by the node recorded for that address, the amount and network match the round, and a circle member signed it. Invoices are decoded by my own BOLT11 decoder on @noble/curves, so the checks don't trust a library I can't read. Circle data travels as NIP-44 ciphertext through strfry locally and public relays when hosted; the circle's key lives after the # in the invite link. 305 Vitest tests, including tampered receipts that each fail the right check, and docker compose up starts the app, a relay and a seeded five-member circle.",
+      results:
+        "Submitted to the Dakar Bitcoin Hack with a 2:33 demo video and a written threat model. A demo copy on the test network has a seeded five-member circle anyone can open in a browser and Verify, and a mainnet copy runs alongside it. Stated plainly: no real mainnet payment has gone through Rota yet. Everything is tested on the test network, and M-Pesa addresses are checked on mainnet with invoices that are never paid, so the M-Pesa payout is wired up but not yet tested with real money.",
+      challenges:
+        "Proof was harder than payment. bitcoin.co.ke, the service that pays out to M-Pesa, sets no description hash and offers no verify URL, so receipts for M-Pesa recipients rely on a weaker address proof plus the issuer check, and the README says so. Its invoices expire in two minutes, so the phone fetches one only when the member taps Pay. With no server, problems a database solves for free needed signatures: a late joiner could backdate a join event, so the organizer's device publishes a signed roster once the circle is full, and because every member can decrypt every receipt, two claims on one payment show as disputed until the recipient signs who paid. The threat model also shows where the pitch stops being true: the built-in wallet has to trust the web host, so the advice is to keep about one contribution in it.",
+    },
+  },
+  {
     slug: "hakika",
     title: "Hakika",
     description:
