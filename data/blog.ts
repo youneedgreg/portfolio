@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "a-paid-invoice-doesnt-prove-who-you-paid",
+    title: "A paid invoice doesn't prove who you paid",
+    summary:
+      "A Lightning preimage proves an invoice was paid, not that it was the recipient's. Rota's receipts pass five checks on each member's phone, against the circle's own record, and the M-Pesa route people in Kenya actually use only allows the weaker address proof.",
+    date: "2026-11-19",
+    readingTime: "4 min read",
+    tags: ["Bitcoin", "Lightning", "Payments", "Security"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
     slug: "who-joined-first-with-no-server",
     title: "Who joined first, with no server",
     summary:

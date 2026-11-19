@@ -1,0 +1,47 @@
+Rota is a savings circle with no treasurer. Each round, every member's phone pays that round's recipient directly over Lightning, and the group needs to know who paid. With no treasurer keeping the notebook, the payment itself has to prove it.
+
+I came in thinking a Lightning payment proves itself. It does, but it proves less than I needed.
+
+## What a preimage proves
+
+Every Lightning invoice carries a payment hash. When the invoice is paid, the payer learns the preimage: the value whose SHA-256 is that hash. Nobody can produce it without the payment going through. So a receipt that holds an invoice and its preimage proves that this invoice was paid.
+
+It doesn't prove the invoice was the recipient's. A member could pay an invoice from their own second wallet, keep the preimage and post it as their contribution. The check passes, and the money never left their pocket.
+
+## Five checks instead of one
+
+So a Rota receipt has to pass five checks. Every one runs on the phone of the member pressing Verify:
+
+| Check | Passes when |
+|---|---|
+| Paid | SHA-256 of the preimage equals the invoice's payment hash |
+| To this address | The invoice commits to the recipient's Lightning address |
+| By this service | The invoice is signed by the node recorded for that address when the recipient joined |
+| This amount, this round | The right network, exactly the circle's contribution in local money, and sats within ±20% of today's price |
+| By this member | The receipt is signed by a key on the circle's member list |
+
+The most important rule sits outside the table: **the recipient, their node and the contribution come from the circle's own record, never from the receipt.** A receipt that describes itself can describe anything. A member can't vouch for their own payment.
+
+"By this service" is the check I didn't expect to need. When a recipient joins, their phone fetches an unpaid invoice from their own address and records the node that signed it. Later, every receipt for that recipient has to be signed by that node. An invoice that names the right address but comes from somewhere else fails.
+
+## Where the proof gets weaker
+
+The check I wanted for "to this address" is the description hash. A Lightning address publishes metadata that names the address, and a well-behaved service puts SHA-256 of that metadata into the invoice. Then the invoice itself commits to the address.
+
+The service Rota cares about most doesn't do that. bitcoin.co.ke turns a Kenyan phone number into a Lightning address that pays out to M-Pesa, so a recipient doesn't need a Bitcoin wallet at all. When I checked it on day one with a dummy number, its invoices carried a plain description, "Payment to …@bitcoin.co.ke", and no description hash. There was no LUD-21 verify URL either.
+
+I had two choices: support only the services that follow the spec, or support the one people in Kenya would actually use and say what that costs. I picked the second. For bitcoin.co.ke, the address check reads the signed description, and Verify says the proof is the weaker one. The issuer check carries more of the weight.
+
+There's one more limit I put in the README in plain words. When the address belongs to a custodial service, the receipt proves the service was paid for that address. Crediting the M-Pesa account is the service's job, and no receipt can show it.
+
+## Tests that break receipts on purpose
+
+The first four checks live in their own MIT package in the repo, `packages/receipts`, so any Lightning app could use them. The member signature is Rota's own and lives with the circle's records. The checks decode invoices with my own BOLT11 decoder on `@noble/curves` and `@noble/hashes`, because I didn't want the proof to rest on a library I couldn't read.
+
+Most of the tests take a good receipt and break one thing: a preimage from another payment, swapped metadata that still names the address, an invoice signed by another node (someone paid themselves), less than the round, a testnet invoice in a mainnet circle. Each tampered receipt has to fail the check it targets, by name. A test that only says "invalid" can hide a check that never runs.
+
+## What I took from it
+
+Lightning moves sats in seconds. Proving to a whole group who paid whom, with nobody in the middle to trust, took most of the work on Rota.
+
+> A preimage proves an invoice was paid. Proving it was the right invoice is the hard part.
