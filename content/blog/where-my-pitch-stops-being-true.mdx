@@ -1,0 +1,47 @@
+Rota's pitch had a line I liked a lot: "Rota can pay one contribution a month on your behalf, and nothing else." It was meant to answer the obvious question about any app that touches money: what happens if it gets hacked?
+
+Writing the threat model showed me that line is only half true.
+
+## The half that holds
+
+Rota supports two kinds of wallet. One is your own wallet, connected over Nostr Wallet Connect (NWC). Rota asks for a connection that can only pay, with a monthly budget of one contribution plus 25%, which expires at the end of the cycle. It refuses to save a connection that grants anything wider, has no budget, or has a budget above that cap.
+
+The cap lives in the wallet, not in Rota's code. If Rota were fully compromised and asked the wallet to pay a stranger, the wallet would refuse anything past the budget. For NWC, the pitch holds: a hacked Rota can spend about 1.25 contributions a month per member, until the connection expires.
+
+## The half that doesn't
+
+The other kind is Rota's built-in wallet, using the Breez SDK running in the browser, for members who don't have a Bitcoin wallet yet. Its recovery words never leave the phone. They're sealed with the member's PIN using PBKDF2 with 600,000 rounds and AES-GCM.
+
+Here's the problem I found when I wrote down where each piece of code comes from. The page that asks for the PIN is served by whoever hosts Rota. If that host served altered code, the code could read the wallet the moment the member types their PIN and take the whole balance. Encryption on the phone doesn't help when the code doing the decrypting is the attacker's.
+
+The Content-Security-Policy stops scripts from other sites. It does nothing against the site itself.
+
+So the honest version of the pitch line is: true for your own wallet over NWC, not true for the built-in one against a compromised host.
+
+## What I changed
+
+I didn't hide it, and I didn't drop the built-in wallet. It's the easiest way in for someone with no wallet. Instead:
+
+- **The threat model says it first.** "A compromised web host can empty the built-in wallet" is gap number one, in order of risk.
+- **The advice is specific:** keep about one contribution in the built-in wallet, or use an NWC wallet.
+- **The Devpost story was corrected.** An early draft said "a compromised server can take at most one contribution". That's only true for NWC, so it came out.
+
+Writing the threat model also changed the claim I lead with. "Rota's server never touches the invoice" became "there is no Rota server": the host serves static files only, with no database, no accounts and no API routes. That's both stronger and true.
+
+## The rest of the list
+
+The threat model lists every gap I know of, in order of risk, with the code behind every defence:
+
+1. A compromised web host can empty the built-in wallet once the member types their PIN.
+2. A leaked invite link can't be revoked yet, because there's no key rotation.
+3. The relay is open to writes, so junk events could crowd out real receipts.
+4. When two members claim one payment, the recipient's settlement is their word, not proof.
+5. A track record shows what a member paid, not what they skipped.
+
+None of these is hidden behind a "coming soon". They're on the same page as the defences.
+
+## What I took from it
+
+I expected a threat model to make the project look weaker to judges. Writing one made it more credible to me, because now I know exactly which sentences I can defend.
+
+> Write down where your claims stop, before someone else finds it for you.

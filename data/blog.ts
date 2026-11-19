@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "where-my-pitch-stops-being-true",
+    title: "Where my pitch stops being true",
+    summary:
+      "\"Rota can pay one contribution a month on your behalf, and nothing else\" holds for a capped Nostr Wallet Connect wallet. The threat model showed it doesn't hold for the built-in wallet against a compromised web host, and why I said so instead of hiding it.",
+    date: "2026-11-19",
+    readingTime: "3 min read",
+    tags: ["Threat Modeling", "Security", "Bitcoin", "Wallets"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
     slug: "the-quote-photo-gave-the-model-orders",
     title: "The quote photo gave the model orders",
     summary:
