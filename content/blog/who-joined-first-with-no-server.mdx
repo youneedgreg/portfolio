@@ -1,0 +1,43 @@
+In a savings circle, your seat decides when you get the pot. Seat one is paid in the first round, and the last seat waits until the end. Seat order is money.
+
+Rota has no server and no database. A circle lives on a Nostr relay as signed, encrypted events: the organizer's definition, one join event per member, and receipts. The relay stores ciphertext and can't read it. Every phone works out the circle from those events on its own. That rules out the usual answer to "who joined first?", which is the row a database inserted first.
+
+## Join order you can fake
+
+The first version took seats in join order: sort the join events by time, one seat per member. It looked fine until I wrote a test for it.
+
+A Nostr event's timestamp is set by whoever signs it. A late joiner can sign a join dated last week, and every phone will sort it ahead of members who really joined earlier. That bumps someone out of their seat, and it works even after the circle is full. The test showed exactly that.
+
+## The organizer's roster
+
+The fix is a third kind of event. Once every seat is taken, the organizer's device publishes a signed roster. From then on, the order is fixed, whatever timestamps turn up later.
+
+Each phone accepts a roster only if the organizer's key signed it and everyone on it has a join event. Paying waits until the roster exists, so no money moves while seats can still shift.
+
+That puts some trust in the organizer, but they already have it: they chose the members and shared the invite link. What they still can't do is touch anyone's money or change a receipt.
+
+## Copied receipts
+
+The second problem came from encryption. Every receipt is encrypted for the circle, so every member can decrypt every receipt. That's how anyone can press Verify. But it also means a member can copy someone else's invoice and preimage into a receipt of their own. The copy passes every check, because it is a real payment to the right address.
+
+A database would store one payment once. Rota had to make the rule explicit: **one payment counts once.** When two members claim the same payment hash, neither counts. Both show as "disputed".
+
+## The recipient settles it
+
+Someone has to break the tie, and the person who can is the one who received the money. So the round's recipient can sign a "received" record that says which member each disputed payment came from.
+
+I kept its power small on purpose:
+
+- **It settles disputes and nothing else.** A payment only one member claims is already proven by its receipt. If the recipient could mark it unpaid, a dishonest recipient could deny money they received.
+- **Only the recipient's key counts,** and the recipient is taken from the circle's record, not from the event.
+- **The latest record wins,** so a wrong pick can be corrected.
+
+The record is still the recipient's word, not proof. An M-Pesa recipient sees an SMS, not a payment hash. They know who sent the money from the group chat. The record makes their word signed and visible to everyone, but it doesn't make it true. It's listed as a known gap in Rota's threat model.
+
+The real fix would bind the payer into the invoice itself, through an LNURL comment or payer data, so a copied receipt would fail outright. I checked on 18 November: Alby's addresses support both, and bitcoin.co.ke, the M-Pesa route Rota cares about most, supports neither. So for now the recipient's record is the only way to settle a dispute for an M-Pesa recipient.
+
+## What I took from it
+
+Problems a database solves for free, like which row came first or whether a payment is already recorded, didn't go away when the server did. Each one became a question of who is allowed to sign what.
+
+> With no server, every "who decides?" needs an answer you can check with a signature.

@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "who-joined-first-with-no-server",
+    title: "Who joined first, with no server",
+    summary:
+      "In a savings circle, seat order is money. With no database, a late joiner could backdate a Nostr event and take an earlier seat, and any member could copy another's receipt. A signed roster and a recipient-signed record fixed both, and one of them is still only someone's word.",
+    date: "2026-11-19",
+    readingTime: "4 min read",
+    tags: ["Nostr", "System Design", "Cryptography", "Security"],
+    project: { title: "Rota", slug: "rota" },
+  },
+  {
     slug: "where-my-pitch-stops-being-true",
     title: "Where my pitch stops being true",
     summary:
