@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "every-tester-said-it-looked-bad",
+    title: "Every tester said it looked bad",
+    summary:
+      "The checks passed and the words were clear, but every tester said Phoneless looked bad. I rebuilt the interface, re-ran every accessibility check on the new design, and admit what I failed to record.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["UX", "Accessibility", "User Testing", "Design"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
     slug: "a-paid-invoice-doesnt-prove-who-you-paid",
     title: "A paid invoice doesn't prove who you paid",
     summary:
