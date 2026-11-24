@@ -1,0 +1,28 @@
+I had a working app. Unit tests passed, the browser checks passed, Lighthouse gave it 100 for accessibility. Then I watched people take the drill on their own phones.
+
+Every tester said the same thing first: it looked bad.
+
+## The words were fine
+
+Before that, I had read every sentence aloud to seven people who aren't developers, and nobody was confused by any of them. The words worked. The look didn't.
+
+That was hard to hear, because I had treated the plain look as a feature. A safety tool, I thought, should look calm and serious. To the people using it, it looked unfinished, and an unfinished-looking tool about your money and your accounts is one you don't trust.
+
+## What I changed
+
+I rebuilt the whole interface. I mocked up three directions after browsing Refero Styles and picked the one I called Forest and lime. It uses system fonts only, so the app stayed small. Beyond colour, the user experience changed too:
+
+- A **sticky progress bar** in the drill: "3 of 15 answered".
+- A **big score** on the result, "1 of 5", with a five-part meter.
+- A **"Your next step"** box with one button that jumps to the most urgent fix.
+- **Plan steps as cards** that you can tick off as done.
+
+Then I ran every check again on the new design, because a redesign is exactly when accessibility breaks. Zoom at 200% and 400%, 320-pixel screens, contrast in light and dark, keyboard only, colour removed, axe-core and Lighthouse: all passed, and so did TalkBack on my Samsung and VoiceOver on a Mac.
+
+## What I got wrong
+
+I didn't record the numbers. I don't have how many testers there were, their scores before and after, or how many hit the sign-in loop. The test log and the Devpost stories say so plainly, because a made-up number would be worse than none.
+
+Next time I'll write the counts down as I go, even when the result is embarrassing. Especially then.
+
+> People will tell you the look is wrong before they tell you anything else. For a tool people have to trust, the first impression is part of whether it works.

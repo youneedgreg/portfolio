@@ -14,6 +14,36 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-lock-was-blocked-by-its-own-sign-in",
+    title: "The lock was blocked by its own sign-in",
+    summary:
+      "Every stolen-phone guide says lock the phone remotely. From a borrowed phone, the sign-in code goes to the SIM in the stolen phone. That loop is why Phoneless marks actions Ready, Later or Blocked instead of handing out a checklist.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["Product Design", "Security", "2FA", "Mobile"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
+    slug: "the-help-page-and-my-samsung-disagreed",
+    title: "The help page and my Samsung disagreed",
+    summary:
+      "I wrote Phoneless's settings steps from help pages, then followed them on a Samsung Galaxy A06. Two had the wrong menu names, and in a safety drill a wrong step means false confidence, so both failures stay in the test log.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["Testing", "Android", "UX Writing", "Mobile"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
+    slug: "every-tester-said-it-looked-bad",
+    title: "Every tester said it looked bad",
+    summary:
+      "The checks passed and the words were clear, but every tester said Phoneless looked bad. I rebuilt the interface, re-ran every accessibility check on the new design, and admit what I failed to record.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["UX", "Accessibility", "User Testing", "Design"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
     slug: "a-paid-invoice-doesnt-prove-who-you-paid",
     title: "A paid invoice doesn't prove who you paid",
     summary:

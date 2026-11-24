@@ -1,0 +1,35 @@
+Every stolen-phone guide tells you to lock the phone remotely. Google's Find Hub, Apple's Find My: sign in from another device, press lock, done.
+
+When I wrote down the steps for a student in Nairobi standing on the street with a borrowed phone, that advice broke at the second step.
+
+## The loop
+
+To lock the phone you sign in to your Google Account on the borrowed phone. Your account has 2-Step Verification on, which is good advice too. So Google sends a code. To your phone number. Which is in the SIM. Which is in the phone that was just stolen.
+
+Phone gone, sign in to Find Hub, code needed, code goes to the stolen SIM. The action is not hard. It is impossible as things stand.
+
+That one sentence is why Phoneless exists. A checklist can tell you "lock your phone". It can't tell you that you won't be able to.
+
+## Blocked is not the same as hard
+
+Phoneless marks each of five first-hour actions as one of three things:
+
+- **Ready**: you could do it within minutes from a borrowed phone, with nothing looked up.
+- **Later**: you have to reach something you don't have with you first, like a bank number that was only in the stolen phone.
+- **Blocked**: it can't be done as things stand.
+
+The remote lock lands on Blocked when two answers meet: your account's second step only goes to this phone, and you have no backup way in. Neither answer is a mistake on its own. Together they close the loop.
+
+I wrote that rule as a plain function with its own tests, because it's the one I most needed to be right.
+
+## The fix is boring, and that's the point
+
+The fix is small and you do it while you still have the phone: print backup codes and keep them at home, or add a second way to sign in that isn't this phone. After that, the same drill shows the lock as Ready.
+
+The sample person in the demo starts at 1 of 5 first-hour actions. The loop is the main reason. Eight fixes later she is at 5 of 5.
+
+## It also changed the order
+
+Breaking the loop led to a second question: lock first, or call the carrier first? Google's help says the phone has to be online to receive the lock. Once the SIM is blocked, the lock may only arrive over Wi-Fi. I asked someone at a bank or phone shop in Kenya, and the plan now blocks the line first. That order comes from one person's advice, not a published rule, and the README says so.
+
+> The useful question isn't "what should you do?" It's "what would stop you?"
