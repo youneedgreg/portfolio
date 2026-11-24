@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-help-page-and-my-samsung-disagreed",
+    title: "The help page and my Samsung disagreed",
+    summary:
+      "I wrote Phoneless's settings steps from help pages, then followed them on a Samsung Galaxy A06. Two had the wrong menu names, and in a safety drill a wrong step means false confidence, so both failures stay in the test log.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["Testing", "Android", "UX Writing", "Mobile"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
     slug: "every-tester-said-it-looked-bad",
     title: "Every tester said it looked bad",
     summary:

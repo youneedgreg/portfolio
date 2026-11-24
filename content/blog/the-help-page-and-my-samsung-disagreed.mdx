@@ -1,0 +1,27 @@
+Phoneless tells you what to change on your phone while you still have it: hide message previews on the lock screen, turn on a SIM PIN. I wrote those steps from Google's help pages. Then I followed them on my own Samsung Galaxy A06, running Android 16, and two of them were wrong.
+
+## The lock screen that wasn't
+
+My step said to hide message content using "the lock screen option" under Notifications.
+
+Samsung's Notifications screen does have an item called Lock screen. It only sets how notifications look, not whether their content shows. The setting I wanted was somewhere else: Notifications, then Hide content while locked, then Hide when locked.
+
+Someone following my words would have changed the wrong setting, seen something happen and moved on believing their codes were hidden.
+
+## The SIM lock with four different names
+
+Same story for the SIM PIN. Right place, different names. On my phone it is Security and privacy, then More security settings, then SIM card security, then Lock SIM card. None of those labels matched what I had written.
+
+## What I changed
+
+I rewrote both steps from the phone itself, word for word as the screens say, and logged both as failures in the test log before the fix, not after. A failed row stays in the log.
+
+It's one phone and one Android version. Other Samsung models and other brands may use other names again, so the steps say where to look as well as what to tap.
+
+## Why it matters more here than usual
+
+A wrong step in most apps costs a confused minute. In a safety drill, a wrong step produces false confidence: you tick "I fixed this", the score goes up, and the gap is still there on the day.
+
+The other phone checks went fine. A plan code typed by hand on a phone that had never opened the site opened the right plan, the numbers were tappable, and the plan opened in airplane mode. But the two failures taught me more than the passes.
+
+> Help pages describe a phone. Test on the phone your user actually has.
