@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-lock-was-blocked-by-its-own-sign-in",
+    title: "The lock was blocked by its own sign-in",
+    summary:
+      "Every stolen-phone guide says lock the phone remotely. From a borrowed phone, the sign-in code goes to the SIM in the stolen phone. That loop is why Phoneless marks actions Ready, Later or Blocked instead of handing out a checklist.",
+    date: "2026-11-24",
+    readingTime: "3 min read",
+    tags: ["Product Design", "Security", "2FA", "Mobile"],
+    project: { title: "Phoneless", slug: "phoneless" },
+  },
+  {
     slug: "the-help-page-and-my-samsung-disagreed",
     title: "The help page and my Samsung disagreed",
     summary:
