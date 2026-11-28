@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-fallback-was-the-leak",
+    title: "The fallback was the leak",
+    summary:
+      "Hybrid AI falls back to the cloud when the device can't run a prompt. For a class of children, that is exactly when data leaves. Staffroom runs learner tasks on the device or not at all, and refuses out loud.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["AI", "Privacy", "Firebase", "Chrome"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
     slug: "a-model-cant-guard-names",
     title: "A model can't guard names",
     summary:
