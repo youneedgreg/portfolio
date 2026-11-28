@@ -1,0 +1,34 @@
+Hybrid AI has a reassuring pitch. Run the model on the device when you can, fall back to the cloud when you can't, and the user never sees a failure.
+
+When I wrote down what a class teacher in Kenya would put into Staffroom, that pitch turned upside down. The input is a child's levels in each topic and a short note about how they are doing. The fallback is the moment that data leaves the laptop, and it happens exactly when nobody is watching: an older laptop, a browser without the model, a model that hasn't downloaded yet.
+
+For a report remark, falling back isn't graceful. It's the leak.
+
+## Device only, or nothing
+
+So Staffroom has one rule: a task that touches learner data runs on the device or not at all.
+
+Firebase AI Logic gives every request one of four inference modes. Staffroom uses all four, each for a reason:
+
+- **Only on device** for the three tasks that read learner data: report remarks, the summary of what a struggling group shares, and parent notes.
+- **Only in the cloud** for the support plan, because curriculum knowledge is what a small model can't be trusted with, and the question holds no learner.
+- **Prefer in the cloud** and **prefer on device** for the two small tasks with no child in them, a starter activity and a level put into plain words. Falling back is harmless there, so it's allowed.
+
+## A rule in one place, checked in several
+
+A rule written in a settings file is a suggestion. I wanted it to be hard to break by accident, so it lives in code:
+
+- One function, `resolveMode`, decides every task's mode. Learner tasks resolve to only-on-device under every setting, and Remote Config can't change them.
+- Every request goes through one runner. If the engine ever reports a cloud run for an on-device-only task, the result is thrown away and the attempt is logged.
+- The file that reads the class from IndexedDB has no network code at all.
+- Names never enter a prompt, even on the device. Prompts say `[NAME]` and code fills it in afterwards.
+
+## Refusing out loud
+
+The other half of the rule is what happens when the device can't do it. Staffroom doesn't fail quietly. In Safari, which has no on-device model, the learner tasks show "Did not run" and say that learner data is never sent to the cloud instead. The open tasks still run in the cloud, and the privacy ledger shows every request with where it ran.
+
+On the live site, the whole loop ran 41 requests on the laptop and 1 in the cloud, and the ledger's count of learner tasks sent to the cloud was 0. In Safari it was also 0.
+
+That is less impressive than "works everywhere". It's also the only version I'd want a school to trust.
+
+> The fallback isn't a safety net when the thing falling is a child's data.

@@ -68,6 +68,45 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "staffroom",
+    title: "Staffroom",
+    description:
+      "A term-end desk for class teachers, built for #BuildHybridAI 2026, with one rule: anything about a child stays on the laptop. Report remarks, group summaries and parent notes are written by Gemini Nano inside Chrome through Firebase AI Logic in only-on-device mode. The only text that reaches the cloud is a curriculum question, checked against the class list by plain code and shown to the teacher before it is sent. Every request is logged in a privacy ledger on the laptop.",
+    image: "/assets/staffroom-overview.jpg",
+    tags: ["TypeScript", "React", "Vite", "Firebase AI Logic", "Gemini Nano", "App Check", "Remote Config", "Firestore", "IndexedDB", "Vitest", "Firebase Hosting"],
+    href: "https://staffroom-88e70.web.app",
+    github: "https://github.com/youneedgreg/Staffroom",
+    featured: true,
+    size: "large",
+    year: "2026",
+    lastActive: "2026-11-28",
+    role: "Solo: product, privacy rules, front end, Firebase, testing with teachers and video",
+    status: "live",
+    gallery: [
+      "/assets/staffroom-overview.jpg",
+      "/assets/staffroom-remarks.jpg",
+      "/assets/staffroom-outbound-preview.jpg",
+      "/assets/staffroom-name-blocked.jpg",
+      "/assets/staffroom-ledger.jpg",
+      "/assets/staffroom-architecture.jpg",
+    ],
+    openSource: true,
+    categories: ["ai-ml", "frontend"],
+    hackathon: "#BuildHybridAI 2026",
+    caseStudy: {
+      problem:
+        "At the end of term a Kenyan class teacher writes a remark for every learner, works out which groups are stuck on the same topic, plans support for them and writes to parents. AI could take hours off that, but the input is children's levels and notes. Hybrid AI usually falls back to the cloud when the device can't run a prompt, and for a class of children that fallback is the problem: the data leaves exactly when nobody is watching.",
+      approach:
+        "Staffroom has one rule: a task that touches learner data runs on the device or not at all. Remarks, group difficulty summaries and parent notes run only on device, and names never enter a prompt (prompts say [NAME] and code fills the name in). The cloud gets what a small model can't be trusted with, curriculum knowledge: the laptop sums up what a struggling group shares, and only that phrase plus a fixed curriculum question can leave. The teacher sees the exact outbound text, a roster guard re-checks it on every edit, and a privacy ledger records every request with where it ran and, for the cloud, the text sent. In a browser with no on-device model, Staffroom doesn't fall back. It stops and says why.",
+      techDetails:
+        "React, Vite and TypeScript on Firebase Hosting. Every inference goes through one runner: resolveMode is the only place that picks a mode, learner tasks resolve to ONLY_ON_DEVICE under every setting, and a result that reports a cloud run for an on-device-only task is thrown away. The roster guard is plain code, no model: it matches names without accents or apostrophes, names run together, admission numbers, long digit runs, emails and dates. The class lives in IndexedDB, in the one file with no network code. App Check with reCAPTCHA Enterprise protects the API, Remote Config switches a school to a strict policy with no reload, and a Firestore library holds plans teachers choose to share. All four inference modes are used, each for a reason. 142 unit tests and 142 browser checks run against a simulated engine; the real model's results are in the test log.",
+      results:
+        "Submitted to #BuildHybridAI 2026 with a 2:31 demo video. On a MacBook Air M2 with Chrome 157: 30 of 30 remarks written on the laptop, median 4.1 s each once warm, 27 of 30 usable without edits by my reading. With wifi on, an in-page observer saw 0 requests while the 30 remarks were written. The whole loop on the live site ran 41 requests on the laptop and 1 in the cloud, with 0 learner tasks sent to the cloud; in Safari, with no on-device model, the learner tasks stopped and still 0 were sent. Four primary school teachers in Kenya tried it with the invented sample class, and three of the four reached a parent note without help. Stated plainly: desktop Chrome only, the name check can't catch a nickname it has never seen, nothing stored is encrypted, every output is a draft the teacher approves, and this is not legal advice.",
+      challenges:
+        "Search grounding isn't on the free tier for current Gemini models, so the first plan request came back refused. Rather than hide it, Staffroom tells the teacher, asks again without web sources and labels the plan \"No web sources\". The teachers were the second lesson: they liked the idea, but all four said the screens were hard to use, with long remarks trapped in small scrolling boxes. Boxes now grow to fit, and 0 of 30 real remarks are cut off where all 30 were before.",
+    },
+  },
+  {
     slug: "phoneless",
     title: "Phoneless",
     description:

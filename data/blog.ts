@@ -14,6 +14,36 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-fallback-was-the-leak",
+    title: "The fallback was the leak",
+    summary:
+      "Hybrid AI falls back to the cloud when the device can't run a prompt. For a class of children, that is exactly when data leaves. Staffroom runs learner tasks on the device or not at all, and refuses out loud.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["AI", "Privacy", "Firebase", "Chrome"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
+    slug: "a-model-cant-guard-names",
+    title: "A model can't guard names",
+    summary:
+      "Before a curriculum question leaves the laptop, something has to check it holds no child's name. I didn't trust a model with that. Staffroom's roster guard is plain code that knows the class list, and it says what it can't catch.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["Privacy", "TypeScript", "Testing", "AI"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
+    slug: "the-free-tier-said-no-sources",
+    title: "The free tier said no sources",
+    summary:
+      "Staffroom's support plan asked for Google Search grounding. On the free tier the request was refused. Instead of hiding that, the app tells the teacher, asks again without sources and labels the plan.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["Firebase", "Gemini", "Product Design", "AI"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
     slug: "the-lock-was-blocked-by-its-own-sign-in",
     title: "The lock was blocked by its own sign-in",
     summary:

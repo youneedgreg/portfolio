@@ -1,0 +1,31 @@
+Staffroom sends one kind of text to the cloud: a curriculum question about what a group of learners is stuck on. The laptop writes a short phrase about the group's difficulty, and that phrase goes out with a fixed question built from the curriculum.
+
+Before anything leaves, something has to make sure the phrase holds no child's name. The obvious move in an AI project is to ask a model. I didn't.
+
+## Why not a model
+
+A model that checks for names is a model that can miss one, and it fails in ways you can't predict or test exhaustively. It would also be checking text that another model wrote. If the on-device model slips "like Faith" into the difficulty, I don't want the safety net to be a second guess from the same kind of system.
+
+The class list is already on the laptop. Checking text against a known list is a job for plain code.
+
+## What the roster guard checks
+
+The guard is a TypeScript function with no model in it. It compares every outgoing word with the class and refuses:
+
+- learner names, including names written without accents or apostrophes ("Ng'ang'a" and "NGANGA" match) and full names run together;
+- admission numbers, the school's name and other terms that point at this class;
+- long runs of digits, email addresses and dates.
+
+The outbound message has two parts: the fixed curriculum question, built only from the curriculum pack, and the free part the model or the teacher wrote, which is checked strictly. The guard has 27 unit tests of its own.
+
+## The teacher sees it too
+
+The guard isn't the only check. Before anything is sent, the teacher sees the exact text that will leave, and every edit is checked again. If a name slips in, the "Ask the cloud" button switches off and says which word it found. Nothing is sent.
+
+In the demo I type ", like Faith" at the end of the difficulty. The check turns red and names Faith. I delete it and the button comes back.
+
+## What it can't catch
+
+A list can only match what's on the list. A nickname or a misspelling the guard has never seen will get past it. I say that in the README and here, because a privacy tool that hides its own gap is worse than one that names it. That gap is the reason the teacher reads the text before it leaves.
+
+> When the input is a known list, a model is the wrong tool for the check.
