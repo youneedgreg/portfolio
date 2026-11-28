@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "a-model-cant-guard-names",
+    title: "A model can't guard names",
+    summary:
+      "Before a curriculum question leaves the laptop, something has to check it holds no child's name. I didn't trust a model with that. Staffroom's roster guard is plain code that knows the class list, and it says what it can't catch.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["Privacy", "TypeScript", "Testing", "AI"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
     slug: "the-free-tier-said-no-sources",
     title: "The free tier said no sources",
     summary:
