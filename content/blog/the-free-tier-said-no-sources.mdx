@@ -1,0 +1,25 @@
+Staffroom's support plan is the one task that belongs in the cloud. A struggling group needs activities that match the curriculum, and that's knowledge a small on-device model can't be trusted with. I wanted the plan to come with sources, so the request asked Gemini for Grounding with Google Search.
+
+The first time I ran it on the real engine, it was refused. HTTP 429, "You exceeded your current quota", four times in a row, while ordinary requests in the same seconds went through.
+
+## Finding the cause
+
+It looked like a rate limit, so the first idea was to switch models. That would have been wasted work. The pricing page for the Gemini Developer API lists Grounding with Google Search as "Not available" on the free tier for every Gemini 3 and newer model. The older models that had free grounding were being retired during the judging window, so they were no answer either.
+
+The 429 wasn't the model. It was the plan the project runs on, and a hackathon demo that has to stay up and free for weeks after the deadline can't rely on a card on file.
+
+## Say it, don't hide it
+
+I had three options: pay for grounding, drop sources from the plan, or make the refusal part of the product. I chose the last one.
+
+When the grounded request is refused, Staffroom tells the teacher that web sources aren't available on this plan and offers "Ask without web sources". Nothing is sent again until the teacher clicks it. The plan that comes back is marked "No web sources", so nobody reads it as checked against the web.
+
+On the live site that plan comes back with three activities for the group, a check after two weeks and something to try at home. The privacy ledger shows both requests: the refused one and the one that answered, each with the exact text sent.
+
+## Why it matters past the free tier
+
+Every cloud feature fails sometimes: a quota, a timeout, a network that drops. An app that pretends nothing happened teaches the user to trust results they shouldn't. One that says "this answer has no sources" lets the teacher decide how much to rely on it.
+
+The same idea runs through the rest of Staffroom. Every result says where it ran, and every refusal says why.
+
+> A labelled limit is more useful than a hidden one.

@@ -14,6 +14,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-free-tier-said-no-sources",
+    title: "The free tier said no sources",
+    summary:
+      "Staffroom's support plan asked for Google Search grounding. On the free tier the request was refused. Instead of hiding that, the app tells the teacher, asks again without sources and labels the plan.",
+    date: "2026-11-28",
+    readingTime: "3 min read",
+    tags: ["Firebase", "Gemini", "Product Design", "AI"],
+    project: { title: "Staffroom", slug: "staffroom" },
+  },
+  {
     slug: "the-lock-was-blocked-by-its-own-sign-in",
     title: "The lock was blocked by its own sign-in",
     summary:
